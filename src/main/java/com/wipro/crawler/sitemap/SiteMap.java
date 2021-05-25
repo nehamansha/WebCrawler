@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class SiteMap {
+
     private final Map<String, Page> pages = new HashMap<>();
     private final String domain;
 
@@ -18,7 +19,9 @@ class SiteMap {
     boolean hasPageFor(Link link) {
         return pages.containsKey(link.getUrl());
     }
-
+    public Map<String, Page> getPages() {
+        return pages;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

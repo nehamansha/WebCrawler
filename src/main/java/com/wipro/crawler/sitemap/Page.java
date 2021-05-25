@@ -5,6 +5,9 @@ import java.util.List;
 
 class Page {
     private final String url;
+
+
+
     private final List<Link> links = new ArrayList<>();
 
     Page(String url) {
@@ -17,6 +20,10 @@ class Page {
 
     public String getUrl() {
         return url;
+    }
+
+    public List<Link> getLinks() {
+        return links;
     }
 
     @Override

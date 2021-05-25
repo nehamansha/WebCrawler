@@ -1,5 +1,6 @@
 package com.wipro.crawler.sitemap;
 
+import static com.wipro.crawler.sitemap.LinkTypeEnum.EXTERNAL;
 import static com.wipro.crawler.sitemap.LinkTypeEnum.INTERNAL;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,20 +17,23 @@ public class SiteMapTest {
     }
 
     @Test
-    public void returnsTrueWhenPageIsListed() {
-        Link mappedPage = Link.newLinkByType("some-page-url", INTERNAL);
+    public void returnsTrueWhenPageAdded() {
+        Link mappedPage = Link.newLinkByType("child-internal-url", INTERNAL);
         siteMap.addPage(new Page(mappedPage.getUrl()));
-
         assertThat(siteMap.hasPageFor(mappedPage), is(true));
+
     }
 
     @Test
-    public void returnsFalseWhenPageNotListed() {
-        Link mappedPage = Link.newLinkByType("some-page-url", INTERNAL);
-        siteMap.addPage(new Page(mappedPage.getUrl()));
+    public void returnsFalseWhenExternalPageNotAdded() {
 
-        Link unmappedPage = Link.newLinkByType("some-other-page-url", INTERNAL);
+        Link unmappedPage = Link.newLinkByType("child-external-url", EXTERNAL);
+        assertThat(siteMap.hasPageFor(unmappedPage), is(false));
+    }
 
+    @Test
+    public void returnsFalseWhenInternalPageNotAdded() {
+        Link unmappedPage = Link.newLinkByType("child-external-url", INTERNAL);
         assertThat(siteMap.hasPageFor(unmappedPage), is(false));
     }
 }

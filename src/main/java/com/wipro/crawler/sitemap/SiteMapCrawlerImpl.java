@@ -2,7 +2,6 @@ package com.wipro.crawler.sitemap;
 
 import com.wipro.crawler.jsoup.DocumentFactory;
 import com.wipro.crawler.jsoup.LinkExtractor;
-import org.jsoup.nodes.Document;
 
 public class SiteMapCrawlerImpl implements SiteMapCrawler {
     private final DocumentFactory documentFactory;
@@ -26,9 +25,9 @@ public class SiteMapCrawlerImpl implements SiteMapCrawler {
      */
     private SiteMap findLinks(Page page, SiteMap siteMap) {
         siteMap.addPage(page);
-        if(null != documentFactory.documentFor(page.getUrl())) {
+        if(null != documentFactory.documentFromUrl(page.getUrl())) {
             for (Link link : linkExtractor.processLinksFromDoc(
-                documentFactory.documentFor(page.getUrl()))) {
+                documentFactory.documentFromUrl(page.getUrl()))) {
                 page.addLink(link);
                 if (link.isInternalLink() && !siteMap.hasPageFor(link)) {
                     findLinks(new Page(link.getUrl()), siteMap);

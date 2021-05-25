@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class DocumentFactory {
 
-    public Document documentFor(String url) {
+    public Document documentFromUrl(String url) {
         try {
             return connectToUrl(url).get();
         } catch (IOException e) {
